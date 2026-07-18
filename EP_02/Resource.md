@@ -1,4 +1,4 @@
-# PLC Simulation
+# PLC Simulation (IEC 61131-3)
 - https://rungs.dev/
 - https://www.plcfiddle.com/
 - https://makersdeck.com/plc
