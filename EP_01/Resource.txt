@@ -1,0 +1,7 @@
+# Resource
+- https://erqos.com/resources/
+- https://erqos.com/wp-content/uploads/resources/eqsp32/EQSP32%20Datasheet%20v1.0%20Rev101425.pdf
+- https://github.com/Erqos/EQSP32
+- https://chatgpt.com/g/g-DBFVaE7Bv-eq-ai
+- https://wokwi.com/esp32
+- https://velxio.dev/editor
