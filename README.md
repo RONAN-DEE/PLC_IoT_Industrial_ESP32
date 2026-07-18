@@ -1,4 +1,5 @@
-PLC + IoT ด้วย AI โดยใช้ Industrial ESP32
+# PLC + IoT ด้วย AI โดยใช้ Industrial ESP32 
+https://www.uncle-engineer.com/course/plc-iot-esp32/
 
 ผู้เรียนสามารถพัฒนาระบบควบคุมอัตโนมัติและระบบ Industrial IoT ได้จริง โดยใช้ ESP32 Industrial Controller เป็นแพลตฟอร์มหลักในการเรียนรู้ ตั้งแต่การเชื่อมต่อเซนเซอร์ การควบคุมอุปกรณ์ การสื่อสารข้อมูล การเชื่อมต่อ Cloud การสร้าง Dashboard และการนำ AI มาประยุกต์ใช้เนื้อหาทั้งหมดเน้นการนำไปใช้งานจริง พร้อมตัวอย่างโครงงานที่สามารถต่อยอดสู่ Smart Factory, Smart Farm และ Smart Building ได้
 - ในคอร์สใช้ภาษาซีในการเขียนร่วมกับ AI ผ่าน Ardunio IDE
@@ -6,7 +7,7 @@ PLC + IoT ด้วย AI โดยใช้ Industrial ESP32
 
 ระยะเวลา จำนวน 10 สัปดาห์ (2-3 ชั่วโมง/สัปดาห์)
 
-Week 1
+## Week 1
 -รู้จัก PLC, Industrial IoT และ AI
 -แนวคิดระบบอัตโนมัติในอุตสาหกรรม
 -PLC คืออะไร
@@ -16,7 +17,7 @@ Week 1
 -แนะนำฮาร์ดแวร์ ESP32
 -การติดตั้งเครื่องมือสำหรับพัฒนาโปรแกรม
 
-Week 2
+## Week 2
 -การควบคุม Digital Input และ Output
 -หลักการทำงานของ Digital Signal
 -การเชื่อมต่อ Push Button และ Switch
@@ -25,7 +26,7 @@ Week 2
 -การสร้างระบบ Start-Stop
 -หลักการ Interlock และ Safety Logic
 
-Week 3
+## Week 3
 -พื้นฐานการเขียนโปรแกรม PLC
 -PLC Scan Cycle
 -ลำดับการทำงานของโปรแกรม
@@ -34,7 +35,7 @@ Week 3
 -State Machine
 -การออกแบบ Logic ควบคุมเครื่องจักร
 
-Week 4
+## Week 4
 -การเชื่อมต่อ Analog Sensor
 -หลักการของ Analog Signal
 -สัญญาณ 0-10V
@@ -43,7 +44,7 @@ Week 4
 -การสอบเทียบเซนเซอร์
 -การวัดอุณหภูมิ ระดับน้ำ และแรงดัน
 
-Week 5
+## Week 5
 -การสื่อสารอุตสาหกรรมด้วย RS485, Modbus RTU และ CAN Bus
 -แนวคิดระบบสื่อสารในงานอุตสาหกรรม
 -พื้นฐาน RS485
@@ -57,7 +58,7 @@ Week 5
 -การรับส่งข้อมูลระหว่างอุปกรณ์
 -การประยุกต์ใช้ CAN Bus ในเครื่องจักรและยานยนต์
 
-Week 6
+## Week 6
 -Industrial IoT และ MQTT
 -พื้นฐาน MQTT
 -Broker และ Client
@@ -66,7 +67,7 @@ Week 6
 -การรับข้อมูลจากอุปกรณ์ภาคสนาม
 -การออกแบบระบบ IoT
 
-Week 7
+## Week 7
 -การสร้าง Dashboard ด้วย Node-RED
 -การติดตั้ง Node-RED
 -การเชื่อมต่อ MQTT
@@ -75,7 +76,7 @@ Week 7
 -การควบคุมอุปกรณ์ผ่าน Web Interface
 -การสร้างระบบ Monitoring
 
-Week 8
+## Week 8
 -การจัดเก็บข้อมูลและวิเคราะห์ข้อมูลอุตสาหกรรม
 -Data Logging
 -Time-Series Database
@@ -84,7 +85,7 @@ Week 8
 -การวิเคราะห์ข้อมูลย้อนหลัง
 -การสร้างรายงานและกราฟสถิติ
 
-Week 9
+## Week 9
 -การประยุกต์ใช้ AI ในงาน PLC และ Industrial IoT
 -พื้นฐาน AI สำหรับวิศวกร
 -Prompt Engineering
@@ -94,7 +95,7 @@ Week 9
 -การสร้างระบบแจ้งเตือนอัจฉริยะ
 -AI Assistant สำหรับงานซ่อมบำรุง
 
-Week 10
+## Week 10
 โครงงาน PLC และ Industrial IoT ด้วย AI
 -การออกแบบระบบ Smart Home
 -การติดตามสถานะเครื่องจักร
@@ -103,13 +104,13 @@ Week 10
 -การสร้าง Dashboard แบบครบวงจร
 -การเชื่อมต่อข้อมูลจาก Sensor, Modbus RTU, CAN Bus และ MQTT เข้าสู่ระบบเดียวกัน
 
-สิ่งที่ผู้เรียนจะได้รับ
+### สิ่งที่ผู้เรียนจะได้รับ
 -เอกสารประกอบการเรียน
 -ตัวอย่าง Source Code
 -ตัวอย่างโปรเจกต์ Industrial IoT
 -ไฟล์ Dashboard และ Flow ตัวอย่าง
 
-โครงงานที่สามารถต่อยอดได้
+### โครงงานที่สามารถต่อยอดได้
 -Smart Factory Monitoring
 -Energy Monitoring System
 -Smart Pump Control
@@ -119,5 +120,5 @@ Week 10
 -Industrial Gateway (Modbus RTU + CAN Bus + MQTT)
 -AI-Powered Industrial Dashboard
 
-<<วันเวลาเรียน>>>
-เรียนออนไลน์ผ่านไลฟ์ในกลุ่มเฟสบุ๊คช่วงบ่าย ทุกวันอาทิตย์ยาว 10 สัปดาห์ เริ่มคลาสแรกวันอาทิตย์ที่ 12 กรกฎาคม 2569 และ เวลา 13.00-15.00 น. (ดูย้อนหลังได้เลยหลังจบไลฟ์)
+<img width="1122" height="1402" alt="image" src="https://github.com/user-attachments/assets/bf501a89-2d03-4eaf-95f5-1b6fe14180bd" />
+
