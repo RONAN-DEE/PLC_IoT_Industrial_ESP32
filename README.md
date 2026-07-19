@@ -122,3 +122,12 @@ https://www.uncle-engineer.com/course/plc-iot-esp32/
 
 <img width="1122" height="1402" alt="image" src="https://github.com/user-attachments/assets/bf501a89-2d03-4eaf-95f5-1b6fe14180bd" />
 
+## อุปกรณ์หลักที่ใช้ (EQSP32C-X – Industrial IoT)
+https://erqos.com/product/eqsp32c-x-industrial-iot-esp32-plc-external-antenna/
+
+<img width="2560" height="1920" alt="image" src="https://github.com/user-attachments/assets/82835240-31ae-4187-a15b-0e56a7bfbe04" />
+
+## อุปกรณ์ทางเลือก (ESP32-S3)
+<img width="1254" height="1254" alt="image" src="https://github.com/user-attachments/assets/95683a7e-86ce-49d7-b380-73f0e41611cf" />
+
+
