@@ -2,7 +2,7 @@
   "format": "plc.v1",
   "language": "ladder",
   "programName": "Ploximity",
-  "exportedAt": 1786869499190,
+  "exportedAt": 1786878698479,
   "program": {
     "version": 4,
     "nodes": [
@@ -15,44 +15,30 @@
       {
         "id": 87,
         "kind": "NO",
+        "tag": "I0",
         "x": 140,
-        "y": 100,
-        "tag": "I0"
-      },
-      {
-        "id": 89,
-        "kind": "NC",
-        "x": 440,
-        "y": 100,
-        "tag": "I2"
+        "y": 100
       },
       {
         "id": 90,
         "kind": "COIL",
-        "x": 580,
-        "y": 100,
-        "tag": "Q0"
-      },
-      {
-        "id": 91,
-        "kind": "NO",
-        "x": 140,
-        "y": 160,
-        "tag": "Q0"
+        "tag": "Q0",
+        "x": 740,
+        "y": 100
       },
       {
         "id": 92,
         "kind": "NO",
+        "tag": "I2",
         "x": 140,
-        "y": 240,
-        "tag": "I3"
+        "y": 240
       },
       {
         "id": 93,
         "kind": "CTU",
-        "x": 520,
-        "y": 240,
         "tag": "C0",
+        "x": 720,
+        "y": 240,
         "params": {
           "preset": 10
         }
@@ -60,37 +46,30 @@
       {
         "id": 94,
         "kind": "NO",
+        "tag": "C0",
         "x": 140,
-        "y": 360,
-        "tag": "I4"
-      },
-      {
-        "id": 95,
-        "kind": "NO",
-        "x": 240,
-        "y": 360,
-        "tag": "T0"
+        "y": 360
       },
       {
         "id": 96,
         "kind": "COIL",
-        "x": 520,
-        "y": 360,
-        "tag": "Q1"
+        "tag": "Q1",
+        "x": 740,
+        "y": 360
       },
       {
         "id": 97,
         "kind": "NO",
+        "tag": "C0",
         "x": 140,
-        "y": 440,
-        "tag": "C0"
+        "y": 440
       },
       {
         "id": 98,
         "kind": "TON",
-        "x": 500,
-        "y": 440,
         "tag": "T0",
+        "x": 720,
+        "y": 440,
         "params": {
           "preset": 5000
         }
@@ -98,19 +77,47 @@
       {
         "id": 99,
         "kind": "NO",
+        "tag": "T0",
         "x": 140,
-        "y": 540,
-        "tag": "T0"
+        "y": 540
       },
       {
         "id": 100,
         "kind": "COIL",
-        "x": 500,
-        "y": 540,
-        "tag": "M0"
+        "tag": "M0",
+        "x": 720,
+        "y": 540
       },
       {
-        "id": 101,
+        "id": 103,
+        "kind": "NC",
+        "tag": "I1",
+        "x": 360,
+        "y": 100
+      },
+      {
+        "id": 104,
+        "kind": "NO",
+        "tag": "Q0",
+        "x": 140,
+        "y": 160
+      },
+      {
+        "id": 105,
+        "kind": "NC",
+        "tag": "T0",
+        "x": 240,
+        "y": 360
+      },
+      {
+        "id": 106,
+        "kind": "NC",
+        "x": 560,
+        "y": 100,
+        "tag": "C0"
+      },
+      {
+        "id": 107,
         "kind": "NO",
         "x": 140,
         "y": 280,
@@ -136,47 +143,6 @@
         ]
       },
       {
-        "id": 4,
-        "from": {
-          "nodeId": 89,
-          "name": "out"
-        },
-        "to": {
-          "nodeId": 90,
-          "name": "in"
-        },
-        "routing": []
-      },
-      {
-        "id": 5,
-        "from": {
-          "nodeId": 86,
-          "name": "out"
-        },
-        "to": {
-          "nodeId": 91,
-          "name": "in"
-        },
-        "routing": [
-          {
-            "x": 40,
-            "y": 160
-          }
-        ]
-      },
-      {
-        "id": 6,
-        "from": {
-          "nodeId": 91,
-          "name": "out"
-        },
-        "to": {
-          "nodeId": 89,
-          "name": "in"
-        },
-        "routing": []
-      },
-      {
         "id": 7,
         "from": {
           "nodeId": 86,
@@ -186,12 +152,7 @@
           "nodeId": 92,
           "name": "in"
         },
-        "routing": [
-          {
-            "x": 40,
-            "y": 240
-          }
-        ]
+        "routing": []
       },
       {
         "id": 8,
@@ -213,35 +174,6 @@
         },
         "to": {
           "nodeId": 94,
-          "name": "in"
-        },
-        "routing": [
-          {
-            "x": 40,
-            "y": 360
-          }
-        ]
-      },
-      {
-        "id": 10,
-        "from": {
-          "nodeId": 94,
-          "name": "out"
-        },
-        "to": {
-          "nodeId": 95,
-          "name": "in"
-        },
-        "routing": []
-      },
-      {
-        "id": 11,
-        "from": {
-          "nodeId": 95,
-          "name": "out"
-        },
-        "to": {
-          "nodeId": 96,
           "name": "in"
         },
         "routing": []
@@ -305,13 +237,97 @@
         "routing": []
       },
       {
-        "id": 16,
+        "id": 21,
         "from": {
           "nodeId": 86,
           "name": "out"
         },
         "to": {
-          "nodeId": 101,
+          "nodeId": 104,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 22,
+        "from": {
+          "nodeId": 104,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 103,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 23,
+        "from": {
+          "nodeId": 94,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 105,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 24,
+        "from": {
+          "nodeId": 105,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 96,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 27,
+        "from": {
+          "nodeId": 87,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 103,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 28,
+        "from": {
+          "nodeId": 103,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 106,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 29,
+        "from": {
+          "nodeId": 106,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 90,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 30,
+        "from": {
+          "nodeId": 86,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 107,
           "name": "in"
         },
         "routing": [
@@ -322,26 +338,14 @@
         ]
       },
       {
-        "id": 17,
+        "id": 31,
         "from": {
-          "nodeId": 101,
+          "nodeId": 107,
           "name": "out"
         },
         "to": {
           "nodeId": 93,
           "name": "R"
-        },
-        "routing": []
-      },
-      {
-        "id": 18,
-        "from": {
-          "nodeId": 87,
-          "name": "out"
-        },
-        "to": {
-          "nodeId": 89,
-          "name": "in"
         },
         "routing": []
       }
@@ -354,20 +358,16 @@
     },
     "signalNames": {
       "I0": "START",
-      "I2": "C0",
       "Q0": "MOTOR",
       "I3": "PX1",
       "Q1": "Lamp",
       "I5": "Timer",
       "T0": "Timer",
-      "M0": "Reset"
+      "M0": "Reset",
+      "I2": "PX1"
     },
     "inputConfig": {
       "I0": {
-        "type": "no-pb",
-        "showName": true
-      },
-      "I2": {
         "type": "no-pb",
         "showName": true
       },
@@ -378,11 +378,19 @@
       "I5": {
         "type": "no-pb",
         "showName": true
+      },
+      "I2": {
+        "type": "no-pb",
+        "showName": true
+      },
+      "I1": {
+        "type": "toggle",
+        "showName": true
       }
     },
     "outputConfig": {
       "Q0": {
-        "color": "amber",
+        "color": "green",
         "showName": true
       },
       "Q1": {
@@ -396,70 +404,57 @@
     "version": 1,
     "components": [
       {
-        "id": 1,
+        "id": 8,
         "kind": "motor",
-        "x": 822.286937854215,
-        "y": 134.8152637401478,
+        "x": 120,
+        "y": 100,
+        "bindings": {
+          "run": "M0"
+        }
+      },
+      {
+        "id": 9,
+        "kind": "motor",
+        "x": 220,
+        "y": 100,
         "bindings": {
           "run": "Q0"
         }
       },
       {
-        "id": 2,
-        "kind": "sensor-prox",
-        "x": 818.6505852639225,
-        "y": 368.451833193816,
-        "params": {
-          "position": 1
-        },
+        "id": 10,
+        "kind": "indicator-light",
+        "x": 320,
+        "y": 100,
         "bindings": {
-          "detected": "I3"
+          "on": "Q1"
         }
       },
       {
-        "id": 3,
-        "kind": "estop",
-        "x": 357.7413990829625,
-        "y": 251.17900439319519,
-        "bindings": {
-          "contact": "I1"
-        }
-      },
-      {
-        "id": 4,
-        "kind": "conveyor-belt",
-        "x": 819.5596428939168,
-        "y": 267.5426215670913,
-        "params": {
-          "length": 10,
-          "speed": 1,
-          "spawnRate": 20
-        },
-        "bindings": {
-          "run": "Q0"
-        }
-      },
-      {
-        "id": 5,
-        "kind": "switch",
-        "x": 225.92322095632778,
-        "y": 248.4517094328971,
-        "label": "Start",
+        "id": 11,
+        "kind": "pb-no",
+        "x": 120,
+        "y": 220,
         "bindings": {
           "contact": "I0"
         }
       },
       {
-        "id": 6,
-        "kind": "indicator-light",
-        "x": 530.4686964382838,
-        "y": 250.2699086162275,
-        "label": "LAMP",
-        "params": {
-          "colour": "red"
-        },
+        "id": 12,
+        "kind": "switch",
+        "x": 220,
+        "y": 220,
         "bindings": {
-          "on": "Q1"
+          "contact": "I1"
+        }
+      },
+      {
+        "id": 13,
+        "kind": "pb-no",
+        "x": 320,
+        "y": 220,
+        "bindings": {
+          "contact": "I2"
         }
       }
     ],
@@ -468,7 +463,7 @@
       "gridSize": 20,
       "gridVisible": true
     },
-    "nextCompId": 7,
+    "nextCompId": 14,
     "nextPipeId": 1
   }
 }
