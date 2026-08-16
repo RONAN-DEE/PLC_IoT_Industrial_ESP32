@@ -1,0 +1,470 @@
+{
+  "format": "plc.v1",
+  "language": "ladder",
+  "programName": "Ploximity",
+  "exportedAt": 1786873213024,
+  "program": {
+    "version": 4,
+    "nodes": [
+      {
+        "id": 86,
+        "kind": "rail",
+        "x": 40,
+        "y": 40
+      },
+      {
+        "id": 87,
+        "kind": "NO",
+        "x": 140,
+        "y": 100,
+        "tag": "I0"
+      },
+      {
+        "id": 90,
+        "kind": "COIL",
+        "x": 580,
+        "y": 100,
+        "tag": "Q0"
+      },
+      {
+        "id": 92,
+        "kind": "NO",
+        "x": 140,
+        "y": 240,
+        "tag": "I2"
+      },
+      {
+        "id": 93,
+        "kind": "CTU",
+        "x": 580,
+        "y": 240,
+        "tag": "C0",
+        "params": {
+          "preset": 10
+        }
+      },
+      {
+        "id": 94,
+        "kind": "NO",
+        "x": 140,
+        "y": 360,
+        "tag": "C0"
+      },
+      {
+        "id": 96,
+        "kind": "COIL",
+        "x": 580,
+        "y": 360,
+        "tag": "Q1"
+      },
+      {
+        "id": 97,
+        "kind": "NO",
+        "x": 140,
+        "y": 440,
+        "tag": "C0"
+      },
+      {
+        "id": 98,
+        "kind": "TON",
+        "x": 580,
+        "y": 440,
+        "tag": "T0",
+        "params": {
+          "preset": 5000
+        }
+      },
+      {
+        "id": 99,
+        "kind": "NO",
+        "x": 140,
+        "y": 540,
+        "tag": "T0"
+      },
+      {
+        "id": 100,
+        "kind": "COIL",
+        "x": 580,
+        "y": 540,
+        "tag": "M0"
+      },
+      {
+        "id": 102,
+        "kind": "NC",
+        "x": 240,
+        "y": 100,
+        "tag": "I1"
+      },
+      {
+        "id": 103,
+        "kind": "NC",
+        "x": 380,
+        "y": 100,
+        "tag": "C0"
+      },
+      {
+        "id": 104,
+        "kind": "NO",
+        "x": 140,
+        "y": 160,
+        "tag": "Q0"
+      },
+      {
+        "id": 105,
+        "kind": "NC",
+        "x": 240,
+        "y": 360,
+        "tag": "T0"
+      },
+      {
+        "id": 106,
+        "kind": "NO",
+        "x": 140,
+        "y": 280,
+        "tag": "M0"
+      }
+    ],
+    "wires": [
+      {
+        "id": 1,
+        "from": {
+          "nodeId": 86,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 87,
+          "name": "in"
+        },
+        "routing": [
+          {
+            "x": 40,
+            "y": 100
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "from": {
+          "nodeId": 86,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 92,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 8,
+        "from": {
+          "nodeId": 92,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 93,
+          "name": "CU"
+        },
+        "routing": []
+      },
+      {
+        "id": 9,
+        "from": {
+          "nodeId": 86,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 94,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 12,
+        "from": {
+          "nodeId": 86,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 97,
+          "name": "in"
+        },
+        "routing": [
+          {
+            "x": 40,
+            "y": 440
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "from": {
+          "nodeId": 97,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 98,
+          "name": "Trg"
+        },
+        "routing": []
+      },
+      {
+        "id": 14,
+        "from": {
+          "nodeId": 86,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 99,
+          "name": "in"
+        },
+        "routing": [
+          {
+            "x": 40,
+            "y": 540
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "from": {
+          "nodeId": 99,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 100,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 18,
+        "from": {
+          "nodeId": 87,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 102,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 19,
+        "from": {
+          "nodeId": 103,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 90,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 20,
+        "from": {
+          "nodeId": 102,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 103,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 21,
+        "from": {
+          "nodeId": 86,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 104,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 22,
+        "from": {
+          "nodeId": 104,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 103,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 23,
+        "from": {
+          "nodeId": 94,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 105,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 24,
+        "from": {
+          "nodeId": 105,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 96,
+          "name": "in"
+        },
+        "routing": []
+      },
+      {
+        "id": 25,
+        "from": {
+          "nodeId": 86,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 106,
+          "name": "in"
+        },
+        "routing": [
+          {
+            "x": 40,
+            "y": 280
+          }
+        ]
+      },
+      {
+        "id": 26,
+        "from": {
+          "nodeId": 106,
+          "name": "out"
+        },
+        "to": {
+          "nodeId": 93,
+          "name": "R"
+        },
+        "routing": []
+      }
+    ],
+    "view": {
+      "gridSize": 20,
+      "gridVisible": false,
+      "snapBlockToGrid": true,
+      "snapConnectionToGrid": false
+    },
+    "signalNames": {
+      "I0": "START",
+      "Q0": "MOTOR",
+      "I3": "PX1",
+      "Q1": "Lamp",
+      "I5": "Timer",
+      "T0": "Timer",
+      "M0": "Reset",
+      "I1": "STOP",
+      "I2": "PX1"
+    },
+    "inputConfig": {
+      "I0": {
+        "type": "no-pb",
+        "showName": true
+      },
+      "I3": {
+        "type": "no-pb",
+        "showName": true
+      },
+      "I5": {
+        "type": "no-pb",
+        "showName": true
+      },
+      "I2": {
+        "type": "no-pb",
+        "showName": true
+      },
+      "I1": {
+        "type": "toggle",
+        "showName": true
+      }
+    },
+    "outputConfig": {
+      "Q0": {
+        "color": "amber",
+        "showName": true
+      },
+      "Q1": {
+        "color": "amber",
+        "showName": true
+      }
+    },
+    "descriptions": {}
+  },
+  "plant": {
+    "version": 1,
+    "components": [
+      {
+        "id": 8,
+        "kind": "motor",
+        "x": 120,
+        "y": 100,
+        "bindings": {
+          "run": "M0"
+        }
+      },
+      {
+        "id": 9,
+        "kind": "motor",
+        "x": 220,
+        "y": 100,
+        "bindings": {
+          "run": "Q0"
+        }
+      },
+      {
+        "id": 10,
+        "kind": "indicator-light",
+        "x": 320,
+        "y": 100,
+        "bindings": {
+          "on": "Q1"
+        }
+      },
+      {
+        "id": 11,
+        "kind": "pb-no",
+        "x": 120,
+        "y": 220,
+        "bindings": {
+          "contact": "I0"
+        }
+      },
+      {
+        "id": 12,
+        "kind": "switch",
+        "x": 220,
+        "y": 220,
+        "bindings": {
+          "contact": "I1"
+        }
+      },
+      {
+        "id": 13,
+        "kind": "pb-no",
+        "x": 320,
+        "y": 220,
+        "bindings": {
+          "contact": "I2"
+        }
+      }
+    ],
+    "pipes": [],
+    "view": {
+      "gridSize": 20,
+      "gridVisible": true
+    },
+    "nextCompId": 14,
+    "nextPipeId": 1
+  }
+}
