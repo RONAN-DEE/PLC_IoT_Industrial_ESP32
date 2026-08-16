@@ -1,0 +1,43 @@
+version: 4
+origin: studio
+aoi:
+  name: Proximity_Sensor
+  description: ""
+  tags:
+    input:
+      - name: I0
+        description: START
+        dataType: BOOL
+      - name: I1
+        description: EMERGENCY
+        dataType: BOOL
+      - name: I2
+        description: PROXIMITY
+        dataType: BOOL
+    output:
+      - name: Y0
+        description: MOTOR
+        dataType: BOOL
+      - name: Y1
+        description: LAMP
+        dataType: BOOL
+    local:
+      - name: C0
+        description: COUNTER
+        dataType: COUNTER
+        defaultValue:
+          PRE: 10
+      - name: T0
+        description: TIMER
+        dataType: TIMER
+        defaultValue:
+          PRE: 5000
+  routines:
+    Logic:
+      type: ld
+      content: |-
+        [XIC(I0),XIC(Y0)]XIO(I1)XIO(C0.DN)OTE(Y0);
+        XIC(I2)CTU(C0);
+        XIC(C0.DN)XIO(T0.DN)OTE(Y1);
+        XIC(C0.DN)TON(T0);
+        XIC(T0.DN)RES(C0);
