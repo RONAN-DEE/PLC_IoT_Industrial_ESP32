@@ -42,7 +42,7 @@ void loop() {
 
   // 2. ส่วนนับจำนวนชิ้นงาน (Counter) ตรวจจับขอบขาขึ้น (Rising Edge)
   if (px1_state == HIGH && last_px1_state == LOW && m1_state) {
-    delay(20); // Software Debounce ป้องกันสัญญาณกระดอน
+    delay(20); // ป้องกันสัญญาณ Debounce 
     counter++;
   }
   last_px1_state = px1_state;
