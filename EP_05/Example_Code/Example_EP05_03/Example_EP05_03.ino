@@ -8,15 +8,15 @@ void setup() {
 
 void loop() {
   // Read the analog value from the LDR
-  int ldrValue = analogRead(ANALOG_PIN);
+  int PT100 = analogRead(ANALOG_PIN);
 
-  // Convert the analog value to a voltage (assuming 5V reference)
-  float voltage = ldrValue * (3.3 / 4095.0);
+  // Convert the analog value to a voltage (assuming 3.3V reference)
+  float voltage = PT100 * (3.3 / 4095.0);
   // Y = mX + C  // เปลี่ยน  Volt to Temp
 
   // Print the PT100 value and voltage to the Serial Monitor
   Serial.print("PT100 Value: ");
-  Serial.print(ldrValue);
+  Serial.print(PT100);
   Serial.print(" | Voltage: ");
   Serial.println(voltage);
 
