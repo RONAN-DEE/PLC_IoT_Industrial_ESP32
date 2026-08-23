@@ -1,25 +1,31 @@
-// Define the analog pin connected to the LDR
-#define ANALOG_PIN 1 
+#include "HX711.h" // Include the HX711 library
+
+// Define pins for HX711
+#define DT 40  // ESP32-S3 GPIO connected to HX711 DAT
+#define SCK 39 // ESP32-S3 GPIO connected to HX711 CLK
+
+HX711 scale; // Create an instance of the HX711 class
 
 void setup() {
-  // Initialize serial communication for debugging
-  Serial.begin(11520);
+  Serial.begin(115200); // Initialize serial communication
+  scale.begin(DT, SCK); // Initialize the HX711 with the defined pins
+  Serial.println("HX711 Load Cell Example");
+  
+  // Calibrate the scale (adjust the factor based on your setup)
+  scale.set_scale(2280.f); // Set the scale factor (calibration value)
+  scale.tare(); // Reset the scale to zero
 }
 
 void loop() {
-  // Read the analog value from the LDR
-  int ldrValue = analogRead(ANALOG_PIN);
-
-  // Convert the analog value to a voltage (assuming 5V reference)
-  float voltage = ldrValue * (3.3 / 4095.0);
-  
-
-  // Print the LDR value and voltage to the Serial Monitor
-  Serial.print("LDR Value: ");
-  Serial.print(ldrValue);
-  Serial.print(" | Voltage: ");
-  Serial.println(voltage);
-
-  // Add a small delay to avoid flooding the Serial Monitor
-  delay(500);
+  // Read the weight from the load cell
+  if (scale.is_ready()) {
+    float weight = scale.get_units(); // Get the weight in units
+    // ใส่ตรงนี้สมการปรับค่า
+    Serial.print("Weight: ");
+    Serial.print(weight);
+    Serial.println(" kg");
+  } else {
+    Serial.println("HX711 not ready. Check wiring.");
+  }
+  delay(500); // Wait for 500ms before the next reading
 }
