@@ -1,4 +1,4 @@
-#include "EQSP32.h"
+#include <EQSP32.h>
 
 EQSP32 eqsp32;
 
