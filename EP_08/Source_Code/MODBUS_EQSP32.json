@@ -1,0 +1,449 @@
+[
+    {
+        "id": "650658eb97d396cd",
+        "type": "tab",
+        "label": "Modbus EQSP32",
+        "disabled": false,
+        "info": "Node-Red : Master/Client\r\nEQSP32 : Slave/Server\r\nTCP/IP : \r\nPORT : 502\r\nID : 1",
+        "env": []
+    },
+    {
+        "id": "52c82e0b9f1e6375",
+        "type": "group",
+        "z": "650658eb97d396cd",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#767676"
+        },
+        "nodes": [
+            "df34e82fbdb3444c",
+            "206e2316522bc93d",
+            "ceb08dd1a1105def",
+            "594a7914cc6b75d8",
+            "f9b86eecf4461f4b",
+            "328333c5e8387afc",
+            "79a53020b6083072",
+            "d28858e7dc56d016",
+            "79229f3456611ce7",
+            "3eacf4b8fa53b047",
+            "2829f5085471c386",
+            "88706b52f95e23d1",
+            "dad9619cf063d71e",
+            "27748ef9b92ccc18",
+            "5a2dacbf5980c966",
+            "3d1c5a8477cbb3f9",
+            "2fe7b4b06ce11496",
+            "606baad425f47ab1"
+        ],
+        "x": 58.63780212402344,
+        "y": 125.3870849609375,
+        "w": 1010.4265422821045,
+        "h": 588.9834365844727
+    },
+    {
+        "id": "df34e82fbdb3444c",
+        "type": "modbus-flex-getter",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "fb09586397b9833c",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "enableDeformedMessages": false,
+        "startDelayTime": "",
+        "x": 462.37476921081543,
+        "y": 376.7140417098999,
+        "wires": [
+            [
+                "d28858e7dc56d016"
+            ],
+            [
+                "328333c5e8387afc"
+            ]
+        ]
+    },
+    {
+        "id": "206e2316522bc93d",
+        "type": "modbus-read",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "1",
+        "dataType": "Coil",
+        "adr": "1",
+        "quantity": "1",
+        "rate": "1",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "enableDeformedMessages": false,
+        "startDelayTime": "",
+        "server": "fb09586397b9833c",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 174.63780212402344,
+        "y": 227.62298774719238,
+        "wires": [
+            [
+                "ceb08dd1a1105def"
+            ],
+            [
+                "f9b86eecf4461f4b"
+            ]
+        ]
+    },
+    {
+        "id": "ceb08dd1a1105def",
+        "type": "function",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "Raw_Int",
+        "func": "\n// แปลง raw data --> ทศนิยม\nvar raw_data = msg.payload[0]; // ข้อมูลที่อ่านได้จาก Modbus จะมาเป็น Array ใน msg.payload\nif (raw_data > 32767) raw_data -= 65536; // จัดการแปลงค่าลบ (Sign Extension สำหรับอินทิเจอร์ 16 บิต)\nmsg.payload = raw_data / 100; // หาร 100 เพื่อนำทศนิยมกลับมา\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 385.77222061157227,
+        "y": 219.52284240722656,
+        "wires": [
+            [
+                "594a7914cc6b75d8"
+            ]
+        ]
+    },
+    {
+        "id": "594a7914cc6b75d8",
+        "type": "debug",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "debug 4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 586.3757591247559,
+        "y": 218.3094425201416,
+        "wires": []
+    },
+    {
+        "id": "f9b86eecf4461f4b",
+        "type": "modbus-response",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "",
+        "registerShowMax": 20,
+        "x": 413.142370223999,
+        "y": 274.5682668685913,
+        "wires": []
+    },
+    {
+        "id": "328333c5e8387afc",
+        "type": "modbus-response",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "",
+        "registerShowMax": 20,
+        "x": 745.234525680542,
+        "y": 428.2152500152588,
+        "wires": []
+    },
+    {
+        "id": "79a53020b6083072",
+        "type": "inject",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "Modbus Function Code",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"unitid\":1,\"address\":0,\"fc\":3,\"value\":0,\"quantity\":1}",
+        "payloadType": "json",
+        "x": 218.56818008422852,
+        "y": 377.4357791543007,
+        "wires": [
+            [
+                "df34e82fbdb3444c"
+            ]
+        ]
+    },
+    {
+        "id": "d28858e7dc56d016",
+        "type": "function",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "Raw_Int",
+        "func": "\n// แปลง raw data --> ทศนิยม\nvar raw_data = msg.payload[0]; // ข้อมูลที่อ่านได้จาก Modbus จะมาเป็น Array ใน msg.payload\nif (raw_data > 32767) raw_data -= 65536; // จัดการแปลงค่าลบ (Sign Extension สำหรับอินทิเจอร์ 16 บิต)\nmsg.payload = raw_data / 100; // หาร 100 เพื่อนำทศนิยมกลับมา\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 713.620512008667,
+        "y": 370.3236517906189,
+        "wires": [
+            [
+                "79229f3456611ce7"
+            ]
+        ]
+    },
+    {
+        "id": "79229f3456611ce7",
+        "type": "debug",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 963.0643444061279,
+        "y": 371.1578197479248,
+        "wires": []
+    },
+    {
+        "id": "3eacf4b8fa53b047",
+        "type": "comment",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "Read Data",
+        "info": "",
+        "x": 145.03304862976074,
+        "y": 166.3870849609375,
+        "wires": []
+    },
+    {
+        "id": "2829f5085471c386",
+        "type": "inject",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "Modbus Function Code",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[1,1]",
+        "payloadType": "json",
+        "x": 207.26505851745605,
+        "y": 512.9259700775146,
+        "wires": [
+            [
+                "88706b52f95e23d1"
+            ]
+        ]
+    },
+    {
+        "id": "88706b52f95e23d1",
+        "type": "modbus-write",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "2",
+        "dataType": "MCoils",
+        "adr": "1",
+        "quantity": "2",
+        "server": "fb09586397b9833c",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 436.03858757019043,
+        "y": 512.9261560440063,
+        "wires": [
+            [
+                "dad9619cf063d71e"
+            ],
+            [
+                "27748ef9b92ccc18"
+            ]
+        ]
+    },
+    {
+        "id": "dad9619cf063d71e",
+        "type": "debug",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "debug 6",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 629.3386554718018,
+        "y": 507.18199014663696,
+        "wires": []
+    },
+    {
+        "id": "27748ef9b92ccc18",
+        "type": "modbus-response",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "",
+        "registerShowMax": 20,
+        "x": 665.3012447357178,
+        "y": 552.0105991363525,
+        "wires": []
+    },
+    {
+        "id": "5a2dacbf5980c966",
+        "type": "modbus-flex-write",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "server": "fb09586397b9833c",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 441.9089660644531,
+        "y": 626.9002132415771,
+        "wires": [
+            [
+                "2fe7b4b06ce11496"
+            ],
+            [
+                "606baad425f47ab1"
+            ]
+        ]
+    },
+    {
+        "id": "3d1c5a8477cbb3f9",
+        "type": "inject",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "Modbus Function Code",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"unitid\":2,\"address\":10,\"fc\":15,\"value\":[1,1,1,1],\"quantity\":4}",
+        "payloadType": "json",
+        "x": 214.11321258544922,
+        "y": 628.5168046951294,
+        "wires": [
+            [
+                "5a2dacbf5980c966"
+            ]
+        ]
+    },
+    {
+        "id": "2fe7b4b06ce11496",
+        "type": "debug",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 674.498977648789,
+        "y": 622.5926867661459,
+        "wires": []
+    },
+    {
+        "id": "606baad425f47ab1",
+        "type": "modbus-response",
+        "z": "650658eb97d396cd",
+        "g": "52c82e0b9f1e6375",
+        "name": "",
+        "registerShowMax": 20,
+        "x": 664.3433685302734,
+        "y": 673.3705215454102,
+        "wires": []
+    },
+    {
+        "id": "fb09586397b9833c",
+        "type": "modbus-client",
+        "name": "EQSP32",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "127.0.0.1",
+        "tcpPort": 502,
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": 9600,
+        "serialDatabits": 8,
+        "serialStopbits": 1,
+        "serialParity": "none",
+        "serialConnectionDelay": 100,
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 2000,
+        "parallelUnitIdsAllowed": true,
+        "showErrors": false,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "781a70e67a0aa23d",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-modbus": "5.60.2"
+        }
+    }
+]

@@ -1,0 +1,457 @@
+[
+    {
+        "id": "49d099c4737c897e",
+        "type": "tab",
+        "label": "Modbus Simulation",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0a8a19f776b117f8",
+        "type": "group",
+        "z": "49d099c4737c897e",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#767676"
+        },
+        "nodes": [
+            "3ef46ec40ddd2349",
+            "763a3cb2db0a41ac",
+            "337c6a42c5989212",
+            "569cbf25e9f82457",
+            "f94cce0d192c9d5e",
+            "9ec800cab812fece",
+            "210c5859f61bdf9e",
+            "22995132d2be45bf",
+            "337e3b12188e3cfd",
+            "635ba51b10f6f88a",
+            "6cc97788af5d60d7",
+            "95c14a772f41f4db",
+            "ba6eae076675f352",
+            "f6554c3abf7d426a",
+            "04810d9b3c13dcb5",
+            "0beb541020a8cb04",
+            "13dee9880bd99136"
+        ],
+        "x": 201.12526893615723,
+        "y": 381.88039684295654,
+        "w": 885.6889171600342,
+        "h": 657.1802387237549
+    },
+    {
+        "id": "3ef46ec40ddd2349",
+        "type": "modbus-flex-getter",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "fb09586397b9833c",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "enableDeformedMessages": false,
+        "startDelayTime": "",
+        "x": 604.8622360229492,
+        "y": 627.2476034164429,
+        "wires": [
+            [
+                "9ec800cab812fece"
+            ],
+            [
+                "569cbf25e9f82457"
+            ]
+        ]
+    },
+    {
+        "id": "763a3cb2db0a41ac",
+        "type": "modbus-read",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "2",
+        "dataType": "Coil",
+        "adr": "1",
+        "quantity": "2",
+        "rate": "1",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "enableDeformedMessages": false,
+        "startDelayTime": "",
+        "server": "fb09586397b9833c",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 317.1252689361572,
+        "y": 478.15654945373535,
+        "wires": [
+            [
+                "95c14a772f41f4db"
+            ],
+            [
+                "337c6a42c5989212"
+            ]
+        ]
+    },
+    {
+        "id": "337c6a42c5989212",
+        "type": "modbus-response",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "",
+        "registerShowMax": 20,
+        "x": 530.5988464355469,
+        "y": 520.3340358734131,
+        "wires": []
+    },
+    {
+        "id": "569cbf25e9f82457",
+        "type": "modbus-response",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "",
+        "registerShowMax": 20,
+        "x": 887.7219924926758,
+        "y": 678.7488117218018,
+        "wires": []
+    },
+    {
+        "id": "d47e377f8b575e4c",
+        "type": "modbus-server",
+        "z": "49d099c4737c897e",
+        "name": "",
+        "logEnabled": false,
+        "hostname": "127.0.0.1",
+        "serverPort": "502",
+        "responseDelay": 100,
+        "delayUnit": "ms",
+        "coilsBufferSize": 10000,
+        "holdingBufferSize": 10000,
+        "inputBufferSize": 10000,
+        "discreteBufferSize": 10000,
+        "showErrors": false,
+        "showStatusActivities": true,
+        "x": 279.4199752807617,
+        "y": 285.7260398864746,
+        "wires": [
+            [],
+            [],
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "f94cce0d192c9d5e",
+        "type": "inject",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "Modbus Function Code",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"unitid\":2,\"address\":10,\"fc\":3,\"value\":0,\"quantity\":2}",
+        "payloadType": "json",
+        "x": 361.0556468963623,
+        "y": 627.9693408608437,
+        "wires": [
+            [
+                "3ef46ec40ddd2349"
+            ]
+        ]
+    },
+    {
+        "id": "9ec800cab812fece",
+        "type": "debug",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "FC03_Read Holding Register",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920.8141860961914,
+        "y": 621.6914224624634,
+        "wires": []
+    },
+    {
+        "id": "210c5859f61bdf9e",
+        "type": "comment",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "Read Data",
+        "info": "",
+        "x": 287.52051162719727,
+        "y": 422.88039684295654,
+        "wires": []
+    },
+    {
+        "id": "337e3b12188e3cfd",
+        "type": "modbus-write",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "2",
+        "dataType": "MHoldingRegisters",
+        "adr": "10",
+        "quantity": "2",
+        "server": "fb09586397b9833c",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 579.7179641723633,
+        "y": 818.2895078659058,
+        "wires": [
+            [
+                "635ba51b10f6f88a"
+            ],
+            [
+                "6cc97788af5d60d7"
+            ]
+        ]
+    },
+    {
+        "id": "635ba51b10f6f88a",
+        "type": "debug",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "FC15_2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 786.129508972168,
+        "y": 811.3534603118896,
+        "wires": []
+    },
+    {
+        "id": "22995132d2be45bf",
+        "type": "inject",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "Modbus Function Code",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[1,1]",
+        "payloadType": "json",
+        "x": 350.9444351196289,
+        "y": 818.2893218994141,
+        "wires": [
+            [
+                "337e3b12188e3cfd"
+            ]
+        ]
+    },
+    {
+        "id": "6cc97788af5d60d7",
+        "type": "modbus-response",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "",
+        "registerShowMax": 20,
+        "x": 819.7082061767578,
+        "y": 859.7578563690186,
+        "wires": []
+    },
+    {
+        "id": "ba6eae076675f352",
+        "type": "modbus-flex-write",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "server": "fb09586397b9833c",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 598.2827835083008,
+        "y": 952.5747127532959,
+        "wires": [
+            [
+                "0beb541020a8cb04"
+            ],
+            [
+                "13dee9880bd99136"
+            ]
+        ]
+    },
+    {
+        "id": "95c14a772f41f4db",
+        "type": "debug",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "FC01_Coil Status",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 533.8169174194336,
+        "y": 472.68935108184814,
+        "wires": []
+    },
+    {
+        "id": "1e127397c4e3223d",
+        "type": "comment",
+        "z": "49d099c4737c897e",
+        "name": "Modbus Simulation ID2",
+        "info": "Modbus",
+        "x": 298.71044921875,
+        "y": 210.86907196044922,
+        "wires": []
+    },
+    {
+        "id": "f6554c3abf7d426a",
+        "type": "comment",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "Write Data",
+        "info": "",
+        "x": 310.56949615478516,
+        "y": 775.6955070495605,
+        "wires": []
+    },
+    {
+        "id": "04810d9b3c13dcb5",
+        "type": "inject",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "Modbus Function Code",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"unitid\":2,\"address\":10,\"fc\":15,\"value\":[1,1,1,1],\"quantity\":4}",
+        "payloadType": "json",
+        "x": 350.63146209716797,
+        "y": 952.369140625,
+        "wires": [
+            [
+                "ba6eae076675f352"
+            ]
+        ]
+    },
+    {
+        "id": "0beb541020a8cb04",
+        "type": "debug",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "FC15_4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 792.9125709533691,
+        "y": 946.0120258331299,
+        "wires": []
+    },
+    {
+        "id": "13dee9880bd99136",
+        "type": "modbus-response",
+        "z": "49d099c4737c897e",
+        "g": "0a8a19f776b117f8",
+        "name": "",
+        "registerShowMax": 20,
+        "x": 821.5194206237793,
+        "y": 998.0606355667114,
+        "wires": []
+    },
+    {
+        "id": "fb09586397b9833c",
+        "type": "modbus-client",
+        "name": "EQSP32",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "127.0.0.1",
+        "tcpPort": 502,
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": 9600,
+        "serialDatabits": 8,
+        "serialStopbits": 1,
+        "serialParity": "none",
+        "serialConnectionDelay": 100,
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 2000,
+        "parallelUnitIdsAllowed": true,
+        "showErrors": false,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "90f249487d0e1c8b",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-modbus": "5.60.2"
+        }
+    }
+]
