@@ -1,115 +1,131 @@
 #include <EQSP32.h>
-#include <ModbusIP_ESP8266.h>
+#include <ModbusRTU.h>
 
 EQSP32 eqsp32;
-ModbusIP mb;
+ModbusRTU mb;
 
-// Discrete Inputs
-const uint16_t DI_1 = 0;
-const uint16_t DI_2 = 1;
-const uint16_t DI_3 = 2;
-const uint16_t DI_4 = 3;
+// RS485 pins
+int rs485TX;
+int rs485RX;
+int rs485EN;
 
-// Input Registers
-const uint16_t AI_5 = 0;
-const uint16_t AI_6 = 1;
-const uint16_t AI_7 = 2;
-const uint16_t AI_8 = 3;
-
-// Coils
-const uint16_t DO_9  = 0;
-const uint16_t DO_10 = 1;
-const uint16_t DO_11 = 2;
-const uint16_t DO_12 = 3;
-const uint16_t DO_13 = 4;
-const uint16_t DO_14 = 5;
-const uint16_t DO_15 = 6;
-const uint16_t DO_16 = 7;
+// Modbus slave address
+const uint8_t MODBUS_ID = 1;
 
 void setup()
 {
     Serial.begin(115200);
 
-    // EQSP32 startup
     eqsp32.begin();
 
-    // Inputs 1-4
+    //--------------------------------------------------
+    // Configure Inputs
+    //--------------------------------------------------
+
     eqsp32.pinMode(1, DIN);
     eqsp32.pinMode(2, DIN);
     eqsp32.pinMode(3, DIN);
     eqsp32.pinMode(4, DIN);
 
-    // Analog Inputs 5-8
     eqsp32.pinMode(5, AIN);
     eqsp32.pinMode(6, AIN);
     eqsp32.pinMode(7, AIN);
     eqsp32.pinMode(8, AIN);
 
-    // Outputs 9-16
+    //--------------------------------------------------
+    // Configure Outputs
+    //--------------------------------------------------
+
     for (int pin = 9; pin <= 16; pin++)
     {
         eqsp32.pinMode(pin, POUT);
         eqsp32.pinValue(pin, 0);
     }
 
-    // Wait for network connection
-    while (!eqsp32.isDeviceOnline())
-    {
-        delay(100);
-    }
+    //--------------------------------------------------
+    // RS485 Setup
+    //--------------------------------------------------
 
-    Serial.print("IP Address: ");
-    Serial.println(eqsp32.localIP());
+    rs485TX = eqsp32.getPin(EQ_RS485_TX);
+    rs485RX = eqsp32.getPin(EQ_RS485_RX);
+    rs485EN = eqsp32.getPin(EQ_RS485_EN);
 
-    // Start Modbus TCP server
-    mb.server();
+    pinMode(rs485EN, OUTPUT);
+    digitalWrite(rs485EN, LOW);
 
-    // Discrete Inputs
-    mb.addIsts(DI_1);
-    mb.addIsts(DI_2);
-    mb.addIsts(DI_3);
-    mb.addIsts(DI_4);
+    Serial2.begin(
+        9600,
+        SERIAL_8N1,
+        rs485RX,
+        rs485TX
+    );
 
-    // Input Registers
-    mb.addIreg(AI_5);
-    mb.addIreg(AI_6);
-    mb.addIreg(AI_7);
-    mb.addIreg(AI_8);
+    //--------------------------------------------------
+    // Modbus RTU Slave
+    //--------------------------------------------------
 
-    // Coils
-    for (uint16_t i = 0; i < 8; i++)
+    mb.begin(&Serial2, rs485EN);
+    mb.slave(MODBUS_ID);
+
+    // Coils (Outputs 9-16)
+    for(uint16_t i = 0; i < 8; i++)
     {
         mb.addCoil(i);
     }
 
-    Serial.println("Modbus TCP Server Started");
+    // Discrete Inputs (Pins 1-4)
+    for(uint16_t i = 0; i < 4; i++)
+    {
+        mb.addIsts(i);
+    }
+
+    // Input Registers (Pins 5-8)
+    for(uint16_t i = 0; i < 4; i++)
+    {
+        mb.addIreg(i);
+    }
+
+    Serial.println("Modbus RTU Slave Started");
 }
 
 void loop()
 {
+    //--------------------------------------------------
+    // Process Modbus Requests
+    //--------------------------------------------------
+
     mb.task();
 
-    // Read Digital Inputs 1-4
-    mb.Ists(DI_1, eqsp32.readPin(1));
-    mb.Ists(DI_2, eqsp32.readPin(2));
-    mb.Ists(DI_3, eqsp32.readPin(3));
-    mb.Ists(DI_4, eqsp32.readPin(4));
+    //--------------------------------------------------
+    // Update Digital Inputs
+    //--------------------------------------------------
 
-    // Read Analog Inputs 5-8
-    mb.Ireg(AI_5, eqsp32.readPin(5));
-    mb.Ireg(AI_6, eqsp32.readPin(6));
-    mb.Ireg(AI_7, eqsp32.readPin(7));
-    mb.Ireg(AI_8, eqsp32.readPin(8));
+    mb.Ists(0, eqsp32.readPin(1));
+    mb.Ists(1, eqsp32.readPin(2));
+    mb.Ists(2, eqsp32.readPin(3));
+    mb.Ists(3, eqsp32.readPin(4));
 
-    // Write Outputs 9-16 from Coils
-    eqsp32.pinValue(9,  mb.Coil(DO_9)  ? 1000 : 0);
-    eqsp32.pinValue(10, mb.Coil(DO_10) ? 1000 : 0);
-    eqsp32.pinValue(11, mb.Coil(DO_11) ? 1000 : 0);
-    eqsp32.pinValue(12, mb.Coil(DO_12) ? 1000 : 0);
-    eqsp32.pinValue(13, mb.Coil(DO_13) ? 1000 : 0);
-    eqsp32.pinValue(14, mb.Coil(DO_14) ? 1000 : 0);
-    eqsp32.pinValue(15, mb.Coil(DO_15) ? 1000 : 0);
-    eqsp32.pinValue(16, mb.Coil(DO_16) ? 1000 : 0);
+    //--------------------------------------------------
+    // Update Analog Inputs
+    //--------------------------------------------------
+
+    mb.Ireg(0, eqsp32.readPin(5));
+    mb.Ireg(1, eqsp32.readPin(6));
+    mb.Ireg(2, eqsp32.readPin(7));
+    mb.Ireg(3, eqsp32.readPin(8));
+
+    //--------------------------------------------------
+    // Drive Outputs from Modbus Coils
+    //--------------------------------------------------
+
+    eqsp32.pinValue(9,  mb.Coil(0) ? 1000 : 0);
+    eqsp32.pinValue(10, mb.Coil(1) ? 1000 : 0);
+    eqsp32.pinValue(11, mb.Coil(2) ? 1000 : 0);
+    eqsp32.pinValue(12, mb.Coil(3) ? 1000 : 0);
+    eqsp32.pinValue(13, mb.Coil(4) ? 1000 : 0);
+    eqsp32.pinValue(14, mb.Coil(5) ? 1000 : 0);
+    eqsp32.pinValue(15, mb.Coil(6) ? 1000 : 0);
+    eqsp32.pinValue(16, mb.Coil(7) ? 1000 : 0);
 
     delay(10);
 }
