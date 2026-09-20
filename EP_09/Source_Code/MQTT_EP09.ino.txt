@@ -1,0 +1,244 @@
+#include <EQSP32.h>
+#include <WiFi.h>
+#include <PubSubClient.h>
+#include <ArduinoJson.h>
+
+EQSP32 eqsp32;
+
+//====================================================
+// USER SETTINGS
+//====================================================
+const char* WIFI_SSID     = "YOUR_WIFI_SSID";
+const char* WIFI_PASSWORD = "YOUR_WIFI_PASSWORD";
+
+const char* MQTT_SERVER   = "192.168.1.100";
+const int   MQTT_PORT     = 1883;
+
+const char* PUB_TOPIC     = "eqsp32/status";
+const char* SUB_TOPIC     = "eqsp32/cmd";
+
+//====================================================
+// MQTT
+//====================================================
+WiFiClient espClient;
+PubSubClient mqttClient(espClient);
+
+unsigned long lastPublish = 0;
+const uint32_t PUBLISH_INTERVAL = 1000;
+
+//====================================================
+// RELAY STATES
+//====================================================
+bool relayState[17] = {0};   // use index 9-16
+
+//====================================================
+// MQTT RECEIVE CALLBACK
+//====================================================
+void mqttCallback(char* topic, byte* payload, unsigned int length)
+{
+    payload[length] = '\0';
+
+    JsonDocument doc;
+
+    DeserializationError err =
+        deserializeJson(doc, (char*)payload);
+
+    if (err)
+    {
+        Serial.println("Invalid JSON");
+        return;
+    }
+
+    for (int pin = 9; pin <= 16; pin++)
+    {
+        String key = "DO" + String(pin);
+
+        if (doc[key].is<int>())
+        {
+            relayState[pin] = doc[key];
+
+            eqsp32.pinValue(
+                pin,
+                relayState[pin] ? 1000 : 0
+            );
+
+            Serial.print("Relay ");
+            Serial.print(pin);
+            Serial.print(" = ");
+            Serial.println(relayState[pin]);
+        }
+    }
+}
+
+//====================================================
+// WIFI
+//====================================================
+void connectWiFi()
+{
+    if (WiFi.status() == WL_CONNECTED)
+        return;
+
+    Serial.print("Connecting WiFi");
+
+    WiFi.begin(
+        WIFI_SSID,
+        WIFI_PASSWORD
+    );
+
+    while (WiFi.status() != WL_CONNECTED)
+    {
+        delay(500);
+        Serial.print(".");
+    }
+
+    Serial.println();
+    Serial.println("WiFi Connected");
+}
+
+//====================================================
+// MQTT
+//====================================================
+void connectMQTT()
+{
+    while (!mqttClient.connected())
+    {
+        Serial.println("Connecting MQTT...");
+
+        if (mqttClient.connect("EQSP32"))
+        {
+            mqttClient.subscribe(SUB_TOPIC);
+
+            Serial.println("MQTT Connected");
+        }
+        else
+        {
+            delay(2000);
+        }
+    }
+}
+
+//====================================================
+// SETUP
+//====================================================
+void setup()
+{
+    Serial.begin(115200);
+
+    // Custom MQTT requires disabling Erqos IoT
+    EQSP32Configs cfg;
+    cfg.disableErqosIoT = true;
+
+    eqsp32.begin(cfg, true);
+
+    // Inputs 1-4
+    for (int pin = 1; pin <= 4; pin++)
+    {
+        eqsp32.pinMode(pin, DIN);
+    }
+
+    // Analog Inputs 5-8
+    for (int pin = 5; pin <= 8; pin++)
+    {
+        eqsp32.pinMode(pin, AIN);
+    }
+
+    // Relay Outputs 9-16
+    for (int pin = 9; pin <= 16; pin++)
+    {
+        eqsp32.pinMode(pin, RELAY);
+        eqsp32.pinValue(pin, 0);
+    }
+
+    connectWiFi();
+
+    mqttClient.setServer(
+        MQTT_SERVER,
+        MQTT_PORT
+    );
+
+    mqttClient.setCallback(
+        mqttCallback
+    );
+}
+
+//====================================================
+// PUBLISH STATUS
+//====================================================
+void publishStatus()
+{
+    JsonDocument doc;
+
+    JsonObject digital =
+        doc["digital"].to<JsonObject>();
+
+    for (int pin = 1; pin <= 4; pin++)
+    {
+        digital["DI" + String(pin)] =
+            eqsp32.readPin(pin);
+    }
+
+    JsonObject analog =
+        doc["analog"].to<JsonObject>();
+
+    for (int pin = 5; pin <= 8; pin++)
+    {
+        analog["AI" + String(pin)] =
+            eqsp32.readPin(pin);
+    }
+
+    JsonObject relay =
+        doc["relay"].to<JsonObject>();
+
+    for (int pin = 9; pin <= 16; pin++)
+    {
+        relay["DO" + String(pin)] =
+            relayState[pin];
+    }
+
+    doc["inputVoltage_mV"] =
+        eqsp32.readInputVoltage();
+
+    doc["outputVoltage_mV"] =
+        eqsp32.readOutputVoltage();
+
+    char payload[1024];
+
+    serializeJson(
+        doc,
+        payload
+    );
+
+    mqttClient.publish(
+        PUB_TOPIC,
+        payload,
+        true
+    );
+
+    Serial.println(payload);
+}
+
+//====================================================
+// LOOP
+//====================================================
+void loop()
+{
+    if (WiFi.status() != WL_CONNECTED)
+    {
+        connectWiFi();
+    }
+
+    if (!mqttClient.connected())
+    {
+        connectMQTT();
+    }
+
+    mqttClient.loop();
+
+    if (millis() - lastPublish >= PUBLISH_INTERVAL)
+    {
+        lastPublish = millis();
+        publishStatus();
+    }
+
+    delay(10);
+}
