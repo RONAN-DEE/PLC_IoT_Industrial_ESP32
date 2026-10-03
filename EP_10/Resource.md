@@ -1,6 +1,6 @@
 # CAN Bus Explained
 
-* https://www-csselectronics-com.translate.goog/pages/can-bus-simple-intro-tutorial?\_x\_tr\_sl=en\&\_x\_tr\_tl=th\&\_x\_tr\_hl=th\&\_x\_tr\_pto=sge
+* https://www.csselectronics.com/pages/can-bus-simple-intro-tutorial
 
 # CAN-Bus — Step-by-step guide for EQSP32
 
