@@ -8,10 +8,10 @@ EQSP32 eqsp32;
 //====================================================
 // USER SETTINGS
 //====================================================
-const char* WIFI_SSID     = "YOUR_WIFI_SSID";
-const char* WIFI_PASSWORD = "YOUR_WIFI_PASSWORD";
+const char* WIFI_SSID     = "TrueGigatexFiber5G_YdP";
+const char* WIFI_PASSWORD = "aUTaQHpp";
 
-const char* MQTT_SERVER   = "192.168.1.100";
+const char* MQTT_SERVER   = "127.0.0.1";
 const int   MQTT_PORT     = 1883;
 
 const char* PUB_TOPIC     = "eqsp32/status";
