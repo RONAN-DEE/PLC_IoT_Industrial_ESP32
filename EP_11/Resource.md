@@ -1,8 +1,9 @@
-# CAN Bus Explained
+# Smart Solar Water Heater with Home Assistant Integration
 
-* https://www.csselectronics.com/pages/can-bus-simple-intro-tutorial
+* https://erqos.com/smart-solar-water-heater-with-home-assistant-integration/
 
-# CAN-Bus — Step-by-step guide for EQSP32
+# mosquitto MQTT
 
-* https://erqos.com/how-to-connect-your-plc-using-can-bus-step-by-step-guide-for-eqsp32/
-
+* https://mosquitto.org/download/
+# MQTT Explorer
+* https://mqtt-explorer.com/
